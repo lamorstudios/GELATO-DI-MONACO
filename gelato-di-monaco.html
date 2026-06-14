@@ -802,8 +802,8 @@
   }
   .pkg-select-btn:hover, .pkg-select-btn.selected { background: var(--gelato); color: #fff; border-color: var(--gelato); }
 
-  /* video placeholder */
-  .video-hero {
+  /* video-hero UNUSED — replaced by .video-section */
+  .video-hero-OLD {
     position: relative;
     background: linear-gradient(135deg, var(--choco) 0%, #5C3020 100%);
     border-radius: 14px;
@@ -1753,6 +1753,88 @@
   }
   .video-hero:hover::before { opacity: .7; }
 
+
+  /* ── VIDEO SECTION ── */
+  .video-section { margin-top: 3rem; }
+  .video-section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1.05;
+    margin-bottom: 2rem;
+    color: var(--text);
+  }
+  .video-duo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    align-items: start;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .video-wrap {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--dark);
+    box-shadow: 0 8px 40px rgba(62,34,16,.15);
+    transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s;
+  }
+  .video-wrap:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 56px rgba(62,34,16,.2);
+  }
+  .video-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* Both videos: 9/16 portrait */
+  .video-landscape,
+  .video-portrait {
+    aspect-ratio: 9 / 16;
+    width: 100%;
+  }
+  .video-landscape iframe,
+  .video-portrait iframe {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 9 / 16;
+  }
+
+  /* Badges */
+  .video-badge {
+    position: absolute; top: .85rem; left: .85rem; z-index: 2;
+    background: rgba(28,13,6,.65);
+    backdrop-filter: blur(8px);
+    color: rgba(255,255,255,.85);
+    font-size: .68rem; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: .3rem .7rem; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,.12);
+  }
+  .video-badge-short {
+    background: linear-gradient(135deg, rgba(192,96,80,.8), rgba(212,152,10,.7));
+    color: #fff; border-color: transparent;
+  }
+
+  /* Mobile: stack vertically */
+  @media (max-width: 600px) {
+    .video-duo {
+      grid-template-columns: 1fr 1fr;
+      max-width: 100%;
+    }
+  }
+  @media (max-width: 400px) {
+    .video-duo {
+      grid-template-columns: 1fr;
+      max-width: 280px;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -1886,28 +1968,41 @@
         </div>
       </div>
     </div>
-    <div class="video-hero" data-aos style="transition-delay:.2s">
-      <div class="video-play"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ></><polygon points="10,8 18,12 10,16" fill="white" stroke="none"/></svg></div>
-      <div class="video-caption">Gelato di Monaco – Hinter den Kulissen</div>
+    <!-- VIDEOS — Hinter den Kulissen -->
+    <div class="video-section" data-aos style="transition-delay:.15s">
 
-    <!-- Photo strip -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:2.5rem" data-aos>
-      <div style="aspect-ratio:4/3;overflow:hidden;border-radius:12px">
-        <img src="about_neon.jpg" alt="Ice Cream Solves Everything" loading="lazy"
-          style="width:100%;height:100%;object-fit:cover;transition:transform .5s"
-          onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+      <div class="video-label">
+        <span class="section-label" style="margin-top:3rem">Hinter den Kulissen</span>
+        <h3 class="video-section-title">Schau uns beim<br>Machen zu</h3>
       </div>
-      <div style="aspect-ratio:4/3;overflow:hidden;border-radius:12px">
-        <img src="about_terr.jpg" alt="Terrasse Gelato di Monaco" loading="lazy"
-          style="width:100%;height:100%;object-fit:cover;transition:transform .5s"
-          onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+
+      <div class="video-duo">
+
+        <!-- Landscape YouTube video -->
+        <div class="video-wrap video-landscape">
+          <div class="video-badge">Unser Laden</div>
+          <iframe
+            src="https://www.youtube.com/embed/exTpe7YgpLM?rel=0&modestbranding=1&color=white"
+            title="Gelato di Monaco – Hinter den Kulissen"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+
+        <!-- Vertical YouTube Short -->
+        <div class="video-wrap video-portrait" style="aspect-ratio:9/16">
+          <div class="video-badge video-badge-short">Short</div>
+          <iframe
+            src="https://www.youtube.com/embed/uEXGM4thBV4?rel=0&modestbranding=1&color=white"
+            title="Gelato di Monaco – Short"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+
       </div>
-      <div style="aspect-ratio:4/3;overflow:hidden;border-radius:12px">
-        <img src="video_bg.jpg" alt="Gelato di Monaco Atmosphäre" loading="lazy"
-          style="width:100%;height:100%;object-fit:cover;transition:transform .5s"
-          onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-      </div>
-    </div>
     </div>
   </div>
 </section>
